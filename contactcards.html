@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Contact Cards </title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    //This function creates a card in the right side div that displays the data stored from the input fields
+      function createCard(){
+        $("div#rightSide").append("<div class=contactCard> <div class=frontCard>  <h2>" + $("input[name=first_name]").val() + " " + $("input[name=last_name]").val() + "</h2> <p> Click for description </p></div><div class=backCard> <p>" + $("textarea[name=description]").val() + "</p></div></div>");
+      }
+      $(document).ready(function(){
+        //Upon clicking the submit button, data is saved from the input fields and a card is created displaying that data
+        $("input[type=submit]").click(function(){
+          createCard()
+          $("form").submit(function(){
+            return false
+          });
+        });
+        $(document).on("click", '.frontCard', function(){
+          $('.frontCard').hide();
+          $('.backCard').show();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1> Enter Contact Info </h1>
+    <form id="contactInfo" action="process.php" method="post">
+      <label for="first_name"> First Name: </label>
+      <input type="text" id="first_name" name="first_name">
+      <label for="last_name"> Last Name: </label>
+      <input type="text" id="last_name" name="last_name">
+      <label for="description"> Description: </label>
+      <textarea name="description" rows="8" cols="80"> Enter Description </textarea>
+      <input type="submit" value="Submit">
+    </form>
+    <div id="rightSide">
+
+    </div>
+  </body>
+</html>
